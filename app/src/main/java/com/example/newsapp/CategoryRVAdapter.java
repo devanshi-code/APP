@@ -2,6 +2,7 @@ package com.example.newsapp;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,13 +34,16 @@ public class CategoryRVAdapter extends RecyclerView.Adapter<CategoryRVAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull  CategoryRVAdapter.ViewHolder holder, int position) {
-       CategoryRVModal categoryRVModal = categoryRVModals.get(position);
-       holder.categoryTV.setText(categoryRVModals.getCategory());
+        CategoryRVModal categoryRVModal = categoryRVModals.get(position);
+        holder.categoryTV.setText(categoryRVModals.getCategory());
         Picasso.get().load(categoryRVModal.getCategoryImageUrl()).into(holder.categoryIV);
+        holder.itemView.setOnClickListener(new View.onClickListener() {
+            @Override
+            public void OnClick(View v) {
+             categoryClickInterface.onCategoryClick(position);
+            }
 
-
-
-
+        });
     }
 
     @Override
